@@ -1,12 +1,14 @@
 package com.victor.resources.exception;
 
 import java.io.Serializable;
-
+/**
+ * Classe responsável por representar uma mensagem de erro de REST.
+ * @author Victor
+ *
+ */
 public class StandardError implements Serializable{
 	
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private Integer status;
 	private String message;	
