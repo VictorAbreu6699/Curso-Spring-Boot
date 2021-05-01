@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.victor.domain.Categoria;
 import com.victor.services.CategoriaService;
-
+/**
+ * Classe responsavel pelos Métodos GET, PUSH e etc da classe Categoria.
+ * @author User
+ *
+ */
 @RestController
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
@@ -20,6 +24,11 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaService service;
 	
+	/**
+	 * Retorna um objeto com o ID solicitado.
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id)
 	{
