@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.victor.domain.Categoria;
-import com.victor.services.CategoriaService;
+import com.victor.domain.Cliente;
+import com.victor.services.ClienteService;
 /**
- * Classe responsavel pelos Métodos GET, PUSH e etc da classe Categoria.
+ * Classe responsavel pelos Métodos GET, PUSH e etc da classe Cliente.
  * @author User
  *
  */
 @RestController
-@RequestMapping(value="/categorias")
-public class CategoriaResource {
+@RequestMapping(value="/clientes")
+public class ClienteResource {
 	
 	@Autowired
-	private CategoriaService service;
+	private ClienteService service;
 	
 	/**
 	 * Retorna um objeto com o ID solicitado.
@@ -30,7 +30,7 @@ public class CategoriaResource {
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id)
 	{
-		Categoria obj = service.find(id);
+		Cliente obj = service.find(id);
 		
 		return ResponseEntity.ok().body(obj);
 		}		

@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 public class Endereco implements Serializable{
 	
@@ -22,14 +24,24 @@ public class Endereco implements Serializable{
 	private String bairro;
 	private String cep;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
-	
+		
 	@ManyToOne
 	@JoinColumn(name="cidade_id")
 	private Cidade cidade;
 	
+	public Endereco()
+	{
+		id = null;
+		logradouro = null;
+		numero = null;
+		complemento = null;
+		bairro = null;
+		cep = null;
+	}
 	public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep, Cliente cliente, Cidade cidade) {
 		this.id = id;
 		this.logradouro = logradouro;

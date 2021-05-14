@@ -34,22 +34,20 @@ public class Produto implements Serializable {
 		joinColumns = @JoinColumn(name = "produto_id"),
 		inverseJoinColumns = @JoinColumn(name = "categoria_id")
 	)
-	private List<Categoria> categorias;
+	private List<Categoria> categorias = new ArrayList<>();
 	
 	public Produto()
 	{
 		id = null;
 		nome = null;
-		preco = null;		
-		categorias = new ArrayList<>();
+		preco = null;			
 	}
 	
 	public Produto(Integer id, String nome, Double preco)
 	{
 		this.id = id;
 		this.nome = nome;
-		this.preco = preco;
-		categorias = new ArrayList<>();
+		this.preco = preco;		
 	}	
 	public Integer getId()
 	{
