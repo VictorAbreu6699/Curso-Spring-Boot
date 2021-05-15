@@ -1,5 +1,6 @@
 package com.victor;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,20 @@ import com.victor.domain.Cidade;
 import com.victor.domain.Cliente;
 import com.victor.domain.Endereco;
 import com.victor.domain.Estado;
+import com.victor.domain.Pagamento;
+import com.victor.domain.PagamentoComBoleto;
+import com.victor.domain.PagamentoComCartao;
+import com.victor.domain.Pedido;
 import com.victor.domain.Produto;
+import com.victor.domain.enums.EstadoPagamento;
 import com.victor.domain.enums.TipoCliente;
 import com.victor.repositories.CategoriaRepository;
 import com.victor.repositories.CidadeRepository;
 import com.victor.repositories.ClienteRepository;
 import com.victor.repositories.EnderecoRepository;
 import com.victor.repositories.EstadoRepository;
+import com.victor.repositories.PagamentoRepository;
+import com.victor.repositories.PedidoRepository;
 import com.victor.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -42,6 +50,11 @@ public class JavaCursoApplication implements CommandLineRunner {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 	
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	
+	@Autowired
+	private PagamentoRepository pagamentoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(JavaCursoApplication.class, args);
@@ -90,6 +103,22 @@ public class JavaCursoApplication implements CommandLineRunner {
 
 		clienteRepository.saveAll(Arrays.asList(cli1));
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		
+		Pedido ped1 = new Pedido(null, simpleDateFormat.parse("13/05/2021 22:30"), cli1, e1);
+		Pedido ped2 = new Pedido(null, simpleDateFormat.parse("19/05/2021 23:30"), cli1, e2);
+		
+		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+		ped1.setPagamento(pagto1);
+		
+		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, simpleDateFormat.parse("20/10/2020 00:00"), null);
+		ped2.setPagamento(pagto2);
+		
+		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+		
+		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
+		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
 		
 	}
 
