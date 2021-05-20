@@ -11,7 +11,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.victor.domain.Cliente;
-import com.victor.domain.Cliente;
 import com.victor.dto.ClienteDTO;
 import com.victor.repositories.ClienteRepository;
 import com.victor.services.exceptions.DataIntegrityException;
