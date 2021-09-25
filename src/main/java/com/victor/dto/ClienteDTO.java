@@ -8,7 +8,8 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.victor.domain.Cliente;
-
+import com.victor.services.validation.ClienteUpdate;
+@ClienteUpdate
 public class ClienteDTO implements Serializable{	
 	private static final long serialVersionUID = 1L;
 	
@@ -21,7 +22,7 @@ public class ClienteDTO implements Serializable{
 	@NotEmpty(message= "Preenchimento obrigatório")
 	@Email(message="E-mail inválido")
 	private String email;
-	
+
 	public ClienteDTO()	{
 		
 	}
@@ -31,8 +32,7 @@ public class ClienteDTO implements Serializable{
 		nome = obj.getNome();
 		email = obj.getEmail();
 	}
-	
-	
+		
 	public Integer getId() {
 		return id;
 	}
