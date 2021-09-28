@@ -38,6 +38,10 @@ public class PedidoService {
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
 	
+	@Autowired
+	private ClienteService clienteService;
+	
+	
 	/**
 	 * Busca objetos do tipo PedidoRepository por id, caso não seja encontrado ele retorna uma excessão de "ObjectNotFoundException".
 	 * 
@@ -54,6 +58,7 @@ public class PedidoService {
 	public Pedido insert(Pedido obj) {
 		obj.setId(null);
 		obj.setInstance(new Date());
+		obj.setCliente(clienteService.find(obj.getCliente().getId()));
 		obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
 		obj.getPagamento().setPedido(obj);
 		
@@ -68,9 +73,10 @@ public class PedidoService {
 			x.setDesconto(0.0);
 			x.setPreco(produtoService.find(x.getProduto().getId()).getPreco());
 			x.setPedido(obj);
+			x.setProduto(produtoService.find(x.getProduto().getId()));
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
-		
+		System.out.println(obj);
 		return obj;
 		
 	}
