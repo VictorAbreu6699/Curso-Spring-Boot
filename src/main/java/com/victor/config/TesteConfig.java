@@ -8,18 +8,24 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.victor.services.DBService;
+import com.victor.services.EmailService;
+import com.victor.services.MockEmailService;
 
 @Configuration
 @Profile("test")
 public class TesteConfig {
-
 	
 	@Autowired
-	private DBService dbService;
-	
+	private DBService dbService;	
+		
 	@Bean
 	public boolean instantiateDataBase() throws ParseException {
 		dbService.instantiateTesteDataBase();
 		return true;
+	}
+	
+	@Bean
+	public EmailService emailService() {
+		return new MockEmailService();
 	}
 }

@@ -22,6 +22,9 @@ import com.victor.services.exceptions.ObjectNotFoundException;
  */
 @Service 
 public class PedidoService {
+	
+	@Autowired
+	private EmailService emailService;
 
 	@Autowired 
 	private PedidoRepository repo;
@@ -76,7 +79,7 @@ public class PedidoService {
 			x.setProduto(produtoService.find(x.getProduto().getId()));
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
-		System.out.println(obj);
+		emailService.sendOrderConfirmationEmail(obj);
 		return obj;
 		
 	}
