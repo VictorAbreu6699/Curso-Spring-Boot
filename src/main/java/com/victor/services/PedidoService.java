@@ -79,7 +79,7 @@ public class PedidoService {
 			x.setProduto(produtoService.find(x.getProduto().getId()));
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
-		emailService.sendOrderConfirmationEmail(obj);
+		emailService.sendOrderConfirmationHtmlEmail(obj);
 		return obj;
 		
 	}
