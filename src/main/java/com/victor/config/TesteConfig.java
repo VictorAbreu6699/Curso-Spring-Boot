@@ -1,11 +1,18 @@
 package com.victor.config;
 
+import java.io.InputStream;
 import java.text.ParseException;
+
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 
 import com.victor.services.DBService;
 import com.victor.services.EmailService;
@@ -27,5 +34,5 @@ public class TesteConfig {
 	@Bean
 	public EmailService emailService() {
 		return new MockEmailService();
-	}
+	}		
 }
